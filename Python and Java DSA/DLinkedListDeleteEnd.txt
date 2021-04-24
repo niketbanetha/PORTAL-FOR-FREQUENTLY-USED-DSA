@@ -1,0 +1,67 @@
+----Java Code----
+
+
+class DLL {
+    Node head;
+
+    class Node {
+        int data;
+        Node next;
+		Node prev;
+        Node(int d)
+        {
+            data = d;
+            next = null;
+        }
+    }
+
+
+ 
+  void deleteEnd() {
+    if(this.head != null) {
+      if(this.head.next == null) {
+        this.head = null;
+      } else {
+        Node temp = new Node();
+        temp = this.head;
+        while(temp.next.next != null)
+          temp = temp.next;
+        Node lastNode = temp.next;
+        temp.next = null; 
+        lastNode = null;
+      }
+    }
+  }
+}
+
+
+
+-----Python Code----
+class Node:
+
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+		self.prev = None
+ 
+class DLL:
+ 
+
+    def __init__(self):
+        self.head = None
+		
+	def deleteEnd(self):
+        
+        if self.head==None:
+
+        elif self.head.next==None:
+            
+            self.head=None
+        else:
+
+            temp=self.head
+            while temp.next!=None:
+                temp=temp.next
+
+            temp.prev.next=None
+

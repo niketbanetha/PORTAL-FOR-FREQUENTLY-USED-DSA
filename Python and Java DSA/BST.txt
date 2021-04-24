@@ -1,0 +1,203 @@
+-----Java Code-----
+class BinarySearchTree {
+ 
+
+    class Node
+    {
+        int key;
+        Node left, right;
+ 
+        public Node(int item)
+        {
+            key = item;
+            left = right = null;
+        }
+    }
+
+    Node root;
+
+    BinarySearchTree()
+    {
+         root = null;
+    }
+ 
+
+    void insert(int key)
+    {
+         root = insertRec(root, key);
+    }
+ 
+
+    Node insertRec(Node root, int key)
+    {
+ 
+
+        if (root == null)
+        {
+            root = new Node(key);
+            return root;
+        }
+ 
+
+        if (key < root.key)
+            root.left = insertRec(root.left, key);
+        else if (key > root.key)
+            root.right = insertRec(root.right, key);
+ 
+
+        return root;
+    }
+	Node search(int key){
+	
+		Node temp = root;
+		return searchRec(temp,key);
+		
+	}
+	 Node searchRec(Node root,int key)
+	{
+
+		if (root==null || root.key==key)
+			return root;
+	 
+
+		if (root.key < key)	
+		   return search(root.right, key);
+	 
+
+		return search(root.left, key);
+	}
+	
+	void deleteKey(int key) { root = deleteRec(root, key); }
+ 
+
+    Node deleteRec(Node root, int key)
+    {
+
+        if (root == null)
+            return root;
+ 
+
+        if (key < root.key)
+            root.left = deleteRec(root.left, key);
+        else if (key > root.key)
+            root.right = deleteRec(root.right, key);
+
+        else {
+
+            if (root.left == null)
+                return root.right;
+            else if (root.right == null)
+                return root.left;
+
+            root.key = minValue(root.right);
+
+            root.right = deleteRec(root.right, root.key);
+        }
+ 
+        return root;
+    }
+ 
+    int minValue(Node root)
+    {
+        int minv = root.key;
+        while (root.left != null)
+        {
+            minv = root.left.key;
+            root = root.left;
+        }
+        return minv;
+    }
+    
+}
+
+
+
+-----Python Code-----
+
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.left=None
+        self.right=None
+
+class BST():
+    def __init__(self):
+        self.root=None
+
+class BSTFunction():
+
+    def insertBST(self,root,data):
+
+        if root is None:
+
+            return Node(data)
+        else:
+
+            if data>root.data:
+
+                root.right = self.insertBST(root.right,data)
+            else:
+
+                root.left = self.insertBST(root.left,data)
+            return root
+    
+
+    def searchBST(self,root,data):
+        if root:
+
+            if data==root.data:
+
+                return True
+
+            if data > root.data:
+
+                return self.searchBST(root.right,data)
+            else:
+
+                return self.searchBST(root.left,data)
+
+        return False
+
+    def minValueNode(self,root):
+        temp = root
+        while(temp.left is not None):
+            temp = temp.left
+        return temp
+
+    def deleteBST(self,root,data):
+
+        if root is None:
+
+            return root
+
+        if data < root.data:
+
+            root.left = self.deleteBST(root.left, data)
+
+        elif(data > root.data):
+
+            root.right = self.deleteBST(root.right, data)
+
+        else:
+
+            if root.left is None:
+
+                temp = root.right
+                root = None
+                return temp
+    
+            elif root.right is None:
+
+                temp = root.left
+                root = None
+                return temp
+
+
+            temp = self.minValueNode(root.right)
+
+            root.data = temp.data
+
+            root.right = self.deleteBST(root.right, temp.data)
+        return root
+
+

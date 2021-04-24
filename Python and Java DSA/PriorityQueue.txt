@@ -1,0 +1,57 @@
+-----------Python Code---------
+class PriorityQueue():
+    def __init__(self):
+        self.pqueue=[]
+    
+    def enqueue(self,key,priority):
+        self.pqueue.append([key,priority])
+        self.pqueue=sorted(self.pqueue,key=lambda k:k[1])
+    
+    def dequeue(self):
+        if len(self.pqueue)==0:
+            return None
+
+        return self.pqueue.pop(0)
+    
+    def print(self):
+        print("Priority Queue -> {}".format(self.pqueue))
+    
+    def front(self):
+        if len(self.pqueue)==0:
+            print("Priority Queue is empty")
+            return
+        print("Element at top of priority queue is {}".format(self.pqueue[0]))
+    
+    def rear(self):
+        if len(self.pqueue)==0:
+            print("Priority Queue is empty")
+            return
+        print("Element at end of priority queue is {}".format(self.pqueue[-1]))
+    
+
+
+
+
+
+----------Java Code---------
+class PriorityQueueDemo {
+
+    public static void main(String args[])
+    {
+
+        PriorityQueue<Integer> pQueue = new PriorityQueue<Integer>();
+ 
+
+        pQueue.add(10);
+        pQueue.add(20);
+        pQueue.add(15);
+ 
+
+        System.out.println(pQueue.peek());
+ 
+
+        System.out.println(pQueue.poll());
+
+        System.out.println(pQueue.peek());
+    }
+}

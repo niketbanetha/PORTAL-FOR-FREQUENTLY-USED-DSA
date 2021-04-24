@@ -1,0 +1,26 @@
+-------Java Code------
+import java.util.*;
+class UndirectedGraph
+{
+ 
+
+static void addEdge(Vector<Integer> adj[],
+                    int u, int v)
+{
+    adj[u].add(v);
+    adj[v].add(u);
+}
+ 
+}
+
+
+-------Python Code------
+class UndirectedGraph():
+    def __init__(self,n):
+        self.n=n
+        self.graph=defaultdict(list)
+        self.output=[]
+    
+    def addEdge(self,u,v):
+        self.graph[u].append(v)
+        self.graph[v].append(u)

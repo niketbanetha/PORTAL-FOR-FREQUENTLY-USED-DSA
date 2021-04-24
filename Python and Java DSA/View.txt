@@ -1,0 +1,202 @@
+--------------------------------Java Code----------------------------------------
+
+
+----Left View----
+void leftViewUtil(Node node, int level)
+    {
+        // Base Case
+        if (node == null)
+            return;
+ 
+
+        if (max_level < level) {
+            System.out.print(" " + node.data);
+            max_level = level;
+        }
+ 
+
+        leftViewUtil(node.left, level + 1);
+        leftViewUtil(node.right, level + 1);
+    }
+
+------Right View---------
+
+class Max_level {
+  
+    int max_level;
+}
+    void rightViewUtil(Node node, int level, Max_level max_level) {
+  
+
+        if (node == null) 
+            return;
+
+        if (max_level.max_level < level) {
+            System.out.print(node.data + " ");
+            max_level.max_level = level;
+        }
+
+        rightViewUtil(node.right, level + 1, max_level);
+        rightViewUtil(node.left, level + 1, max_level);
+    }
+void rightView(Node node) {
+  
+        rightViewUtil(node, 1, max);
+    }
+
+
+
+------Top View---------
+ private void TopView(Node root)
+    {
+        class QueueObj {
+            Node node;
+            int hd;
+ 
+            QueueObj(Node node, int hd)
+            {
+                this.node = node;
+                this.hd = hd;
+            }
+        }
+        Queue<QueueObj> q = new LinkedList<QueueObj>();
+        Map<Integer, Node> topViewMap
+            = new TreeMap<Integer, Node>();
+ 
+        if (root == null) {
+            return;
+        }
+        else {
+            q.add(new QueueObj(root, 0));
+        }
+ 
+        System.out.println(
+            "The top view of the tree is : ");
+ 
+
+        while (!q.isEmpty()) {
+            QueueObj tmpNode = q.poll();
+            if (!topViewMap.containsKey(tmpNode.hd)) {
+                topViewMap.put(tmpNode.hd, tmpNode.node);
+            }
+ 
+            if (tmpNode.node.left != null) {
+                q.add(new QueueObj(tmpNode.node.left,
+                                   tmpNode.hd - 1));
+            }
+            if (tmpNode.node.right != null) {
+                q.add(new QueueObj(tmpNode.node.right,
+                                   tmpNode.hd + 1));
+            }
+        }
+        for (Entry<Integer, Node> entry :
+             topViewMap.entrySet()) {
+            System.out.print(entry.getValue().data);
+        }
+    }
+
+
+
+------Bottom View---------
+  public void bottomView(Node root)
+    {
+        if (root == null)
+            return;
+
+        int hd = 0;
+
+        Map<Integer, Integer> map = new TreeMap<>();
+
+        Queue<Node> queue = new LinkedList<Node>();
+
+        root.hd = hd;
+        queue.add(root);
+
+        while (!queue.isEmpty())
+        {
+            Node temp = queue.remove();
+ 
+
+            hd = temp.hd;
+
+            map.put(hd, temp.data);
+ 
+
+            if (temp.left != null)
+            {
+                temp.left.hd = hd-1;
+                queue.add(temp.left);
+            }
+
+            if (temp.right != null)
+            {
+                temp.right.hd = hd+1;
+                queue.add(temp.right);
+            }
+        }
+ 
+
+        Set<Entry<Integer, Integer>> set = map.entrySet();
+ 
+
+        Iterator<Entry<Integer, Integer>> iterator = set.iterator();
+
+        while (iterator.hasNext())
+        {
+            Map.Entry<Integer, Integer> me = iterator.next();
+            System.out.print(me.getValue()+" ");
+        }
+    }
+
+
+
+
+--------------------------------Python Code--------------------------------------
+
+def _levelOrderTraversal(root,resultDict,level):
+	if root:
+
+		resultDict[level].append(root.data)
+
+		_levelOrderTraversal(root.left,resultDict,level+1)
+
+		_levelOrderTraversal(root.right,resultDict,level+1)
+
+def rightView(root):
+	resultDict=defaultdict(list)
+	print(resultDict)
+	for i in resultDict:
+		print(resultDict[i][-1]))
+
+def leftView(root):
+	resultDict=defaultdict(list)
+
+	_levelOrderTraversal(root,resultDict,0)
+
+	print(resultDict)
+	for i in resultDict:
+		print(resultDict[i][0])
+
+def _topBottomView(root,hd,resultDict):
+	if root:
+		
+		resultDict[hd].append(root.data)
+
+		_topBottomView(root.left,hd-1,resultDict)
+
+		_topBottomView(root.right,hd+1,resultDict)
+		
+def topView(root):
+
+	resultDict=defaultdict(list)
+	_topBottomView(root,0,resultDict)
+
+	for i in resultDict:
+		print(resultDict[i][0]))
+
+def bottomView(root):
+	resultDict=defaultdict(list)
+	_topBottomView(root,0,resultDict)
+	for i in resultDict:
+		print(resultDict[i][-1]))
+

@@ -1,0 +1,95 @@
+-----Java Code------
+class BellmanFordAlgorithm{
+
+class Edge {
+        int src, dest, weight;
+        Edge()
+        {
+            src = dest = weight = 0;
+        }
+    };
+  
+    int V, E;
+    Edge edge[];
+
+    Graph(int v, int e)
+    {
+        V = v;
+        E = e;
+        edge = new Edge[e];
+        for (int i = 0; i < e; ++i)
+            edge[i] = new Edge();
+    }
+	void BellmanFord(Graph graph, int src)
+    {
+        int V = graph.V, E = graph.E;
+        int dist[] = new int[V];
+  
+
+        for (int i = 0; i < V; ++i)
+            dist[i] = Integer.MAX_VALUE;
+        dist[src] = 0;
+  
+
+        for (int i = 1; i < V; ++i) {
+            for (int j = 0; j < E; ++j) {
+                int u = graph.edge[j].src;
+                int v = graph.edge[j].dest;
+                int weight = graph.edge[j].weight;
+                if (dist[u] != Integer.MAX_VALUE && dist[u] + weight < dist[v])
+                    dist[v] = dist[u] + weight;
+            }
+        }
+  
+
+        for (int j = 0; j < E; ++j) {
+            int u = graph.edge[j].src;
+            int v = graph.edge[j].dest;
+            int weight = graph.edge[j].weight;
+            if (dist[u] != Integer.MAX_VALUE && dist[u] + weight < dist[v]) {
+                System.out.println("Graph contains negative weight cycle");
+                return;
+            }
+        }
+        printArr(dist, V);
+    }
+
+    void printArr(int dist[], int V)
+    {
+        System.out.println("Vertex Distance from Source");
+        for (int i = 0; i < V; ++i)
+            System.out.println(i + "\t\t" + dist[i]);
+    }
+}
+
+
+
+-------Python Code------
+
+class BellmanFordAlgorithm():
+    def __init__(self,n):
+        self.n=n
+        self.graph=defaultdict(list)
+        self.output=[]
+	def BellmanFord(self, src): 
+		dist = [float("Inf")] * self.n
+		dist[src] = 0
+
+		for _ in range(self.n- 1): 
+
+			for u in self.graph:
+				for v,w in self.graph[u]:
+					if dist[u] != float("Inf") and dist[u] + w < dist[v]: 
+							dist[v] = dist[u] + w
+			self.output.append("Distance array is {}".format(dist))
+		
+
+		for u in self.graph:
+			for v,w in self.graph[u]:
+				if dist[u] != float("Inf") and dist[u] + w < dist[v]: 
+						return True
+						
+		for node,distance in enumerate(dist):
+			if distance == float("inf"):
+				distance="No Edge"
+			print("Min distance of node {} from source {} is {}".format(node,src,distance))

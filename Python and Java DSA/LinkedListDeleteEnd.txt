@@ -1,0 +1,55 @@
+-----Java Code----
+class LinkedList {
+    Node head;
+	
+     class Node {
+        int data;
+        Node next;
+		Node(int d)
+        {
+            data = d;
+            next = null;
+        }
+    }
+  
+    void deleteEnd()
+    {
+        if (head == null)
+            return null;
+  
+        if (head.next == null) {
+            return null;
+        }
+
+        Node second_last = head;
+        while (second_last.next.next != null)
+            second_last = second_last.next;
+
+        second_last.next = null;
+
+    }
+}
+
+
+
+-----Python Code----
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+  
+class LinkedList:
+ 
+    def __init__(self):
+        self.head = None 
+		
+	def deleteEnd():
+		if self.head == None:
+			return None
+		if self.head.next == None:
+			self.head = None
+			return None
+		second_last = self.head
+		while(second_last.next.next):
+			second_last = second_last.next
+		second_last.next = None

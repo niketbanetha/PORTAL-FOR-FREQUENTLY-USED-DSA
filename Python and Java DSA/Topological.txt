@@ -1,0 +1,76 @@
+---------Java Code----------
+class TopologicalSortAlgorithm{
+    void topologicalSortUtil(int v, boolean visited[],
+                             Stack<Integer> stack,int V)
+    {
+
+        visited[v] = true;
+        Integer i;
+ 
+
+        Iterator<Integer> it = adj.get(v).iterator();
+        while (it.hasNext()) {
+            i = it.next();
+            if (!visited[i])
+                topologicalSortUtil(i, visited, stack,V);
+        }
+lt
+        stack.push(new Integer(v));
+    }
+	
+    void topologicalSort(int V)
+    {
+        Stack<Integer> stack = new Stack<Integer>();
+ 
+
+        boolean visited[] = new boolean[V];
+        for (int i = 0; i < V; i++)
+            visited[i] = false;
+ 
+
+        for (int i = 0; i < V; i++)
+            if (visited[i] == false)
+                topologicalSortUtil(i, visited, stack,V);
+ 
+
+        while (stack.empty() == false)
+            System.out.print(stack.pop() + " ");
+    }
+}
+
+
+
+---------Python Code----------
+class weightedDirectedGraph():
+    def __init__(self,n):
+        self.n=n
+        self.graph=defaultdict(list)
+        self.output=[]
+		
+	def inDegree(self):
+        arr=[0]*self.n
+        for i in self.graph:
+            for j,w in self.graph[i]:
+                arr[j]+=1
+        return arr
+    
+    def topologicalSort(self):
+
+        arr=self.inDegree()
+
+        queue=[]
+
+        for i in range(0,len(arr)):
+            if arr[i]==0:
+                queue.append(i)
+        
+        
+        while queue:
+
+            node=queue.pop(0)
+			print(node)
+            for u,w in self.graph[node]:
+
+                arr[u]-=1
+                if arr[u]==0:
+                    queue.append(u)

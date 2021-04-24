@@ -1,0 +1,54 @@
+-------Java Code-------
+void BFS(LinkedList<Integer> adj,int s)
+    {
+
+        boolean visited[] = new boolean[V];
+
+        LinkedList<Integer> queue = new LinkedList<Integer>();
+ 
+
+        visited[s]=true;
+        queue.add(s);
+ 
+        while (queue.size() != 0)
+        {
+
+            s = queue.poll();
+            System.out.print(s+" ");
+
+            Iterator<Integer> i = adj[s].listIterator();
+            while (i.hasNext())
+            {
+                int n = i.next();
+                if (!visited[n])
+                {
+                    visited[n] = true;
+                    queue.add(n);
+                }
+            }
+        }
+    }
+
+
+---------Python Code-------
+
+def BFS(self,u):
+
+        visited=[False]*self.n
+
+        queue=[]
+
+        queue.append(u)
+
+        visited[u]=True
+        while queue:
+
+            node=queue.pop(0)
+            print(node)
+
+            for i in self.graph[node]:
+
+                if visited[i]==False:
+
+                    visited[i]=True
+                    queue.append(i)

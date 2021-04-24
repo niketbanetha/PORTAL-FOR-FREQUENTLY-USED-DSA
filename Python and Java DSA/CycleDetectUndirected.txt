@@ -1,0 +1,80 @@
+---------Java Code--------
+Boolean isCyclicUtil(LinkedList<Integer> adj,int v,
+                 Boolean visited[], int parent)
+    {
+
+        visited[v] = true;
+        Integer i;
+
+        Iterator<Integer> it =
+                adj[v].iterator();
+        while (it.hasNext())
+        {
+            i = it.next();
+ 
+
+            if (!visited[i])
+            {
+                if (isCyclicUtil(adj,i, visited, v))
+                    return true;
+            }
+
+            else if (i != parent)
+                return true;
+        }
+        return false;
+    }
+
+    Boolean isCyclic(LinkedList<Integer> adj)
+    {
+         
+
+        Boolean visited[] = new Boolean[V];
+        for (int i = 0; i < V; i++)
+            visited[i] = false;
+
+        for (int u = 0; u < V; u++)
+        { 
+
+            if (!visited[u])
+                if (isCyclicUtil(adj,u, visited, -1))
+                    return true;
+        }
+ 
+        return false;
+    }
+
+
+
+-------Python Code--------
+def isCyclicUtil(graph,v,visited,parent):
+
+	visited[v]= True
+
+
+	for i in graph[v]:
+
+		if  visited[i]==False :
+			if(isCyclicUtil(i,visited,v)):
+				return True
+
+		elif  parent!=i:
+			return True
+	 
+	return False
+	  
+
+
+def isCyclic(graph):
+
+	visited =[False]*(V)
+
+	for i in range(V):
+	   
+
+		if visited[i] ==False:
+			if(isCyclicUtil
+				   (graph,i,visited,-1)) == True:
+				return True
+	 
+	return False

@@ -1,0 +1,43 @@
+----Java Code----
+public class WeightedGraph {
+    static class Edge {
+        int source;
+        int destination;
+        int weight;
+
+        public Edge(int source, int destination, int weight) {
+            this.source = source;
+            this.destination = destination;
+            this.weight = weight;
+        }
+    }
+
+    static class Graph {
+        int vertices;
+        LinkedList<Edge> [] adjacencylist;
+
+        Graph(int vertices) {
+            this.vertices = vertices;
+            adjacencylist = new LinkedList[vertices];
+
+            for (int i = 0; i <vertices ; i++) {
+                adjacencylist[i] = new LinkedList<>();
+            }
+        }
+
+        public void addEgde(int source, int destination, int weight) {
+            Edge edge = new Edge(source, destination, weight);
+            adjacencylist[source].addFirst(edge); //for directed graph
+        }
+	}
+}
+
+
+-------Python Code----
+class DirectedGraph():
+    def __init__(self,n):
+        self.n=n
+        self.graph=defaultdict(list)
+    
+    def addEdge(self,u,v,w):
+        self.graph[u].append([v,w])

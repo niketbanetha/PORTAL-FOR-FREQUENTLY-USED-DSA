@@ -1,0 +1,67 @@
+---------Java Code----------
+
+private boolean isCyclicUtil(List<List<Integer>> adj,int i, boolean[] visited,
+								  boolean[] recStack) 
+{
+
+	if (recStack[i])
+		return true;
+
+	if (visited[i])
+		return false;
+		  
+	visited[i] = true;
+
+	recStack[i] = true;
+	List<Integer> children = adj.get(i);
+	  
+	for (Integer c: children)
+		if (isCyclicUtil(adj,c, visited, recStack))
+			return true;
+			  
+	recStack[i] = false;
+
+	return false;
+}
+
+
+private boolean isCyclic(List<List<Integer>> adj) 
+    {
+          
+        boolean[] visited = new boolean[V];
+        boolean[] recStack = new boolean[V];
+
+        for (int i = 0; i < V; i++)
+            if (isCyclicUtil(adj,i, visited, recStack))
+                return true;
+  
+        return false;
+    }
+	
+
+
+
+--------Python Code----------
+def isCyclicUtil(graph, v, visited, recStack):
+
+	visited[v] = True
+	recStack[v] = True
+
+	for neighbour in graph[v]:
+		if visited[neighbour] == False:
+			if isCyclicUtil(graph,neighbour, visited, recStack) == True:
+				return True
+		elif recStack[neighbour] == True:
+			return True
+
+	recStack[v] = False
+	return False
+
+def isCyclic(graph):
+	visited = [False] * V
+	recStack = [False] * V
+	for node in range(V):
+		if visited[node] == False:
+			if isCyclicUtil(graph,node,visited,recStack) == True:
+				return True
+	return False

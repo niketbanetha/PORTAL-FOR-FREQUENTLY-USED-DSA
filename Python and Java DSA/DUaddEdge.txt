@@ -1,0 +1,22 @@
+------Java Code----
+class DirectedGraph
+{
+ 
+static void addEdge(Vector<Integer> adj[],
+                    int u, int v)
+{
+    adj[u].add(v);
+}
+}
+
+
+
+------Python Code----
+
+class DirectedGraph():
+    def __init__(self,n):
+        self.n=n
+        self.graph=defaultdict(list)
+    
+    def addEdge(self,u,v):
+        self.graph[u].append(v)
